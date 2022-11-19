@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:space_trader_game/route/route.dart';
-import 'package:space_trader_game/view/pages/home_page.dart';
+import 'package:space_trader_game/view/pages/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,13 +14,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Flutter Demo',
-            debugShowCheckedModeBanner: false,
-
-      theme: ThemeData(        
-        primarySwatch: Colors.blue,
-      ),
-       routerConfig: router,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          //primarySwatch: Colors.white,
+          colorScheme:
+              ColorScheme.fromSwatch().copyWith(secondary: Colors.pink),
+          appBarTheme: const AppBarTheme(
+              color: Colors.purple,
+              iconTheme: IconThemeData(
+            color: Colors.white,
+          ))),
+      routerConfig: router,
     );
   }
 }
-
