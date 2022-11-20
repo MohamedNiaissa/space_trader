@@ -1,9 +1,6 @@
+import '../services/CRUD_user.dart';
+
 class LoginUser {
 
-  static isUserThere() {
-    print("Hello user");
-
-    return true;
-  }
 
 }

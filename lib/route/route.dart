@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
+import '../view/pages/actualities.dart';
 import '../view/pages/login_page.dart';
+import '../view/pages/signup_page.dart';
 
 final GoRouter router = GoRouter(
   routes: <GoRoute>[
@@ -9,6 +11,18 @@ final GoRouter router = GoRouter(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
         return const LoginPage();
+      },
+    ),
+    GoRoute(
+      path: '/signup',
+      builder: (BuildContext context, GoRouterState state) {
+        return const SignupPage();
+      },
+    ),
+    GoRoute(
+      path: '/actualities',
+      builder: (BuildContext context, GoRouterState state) {
+        return const Actualities();
       },
     ),
   ],

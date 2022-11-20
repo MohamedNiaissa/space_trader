@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:go_router/go_router.dart';
+import 'package:space_trader_game/controller/CRUD_user_controller.dart';
 
 import '../../controller/login_controller.dart';
 
@@ -24,9 +25,7 @@ class _FormLoginState extends State<FormLogin> {
       child: Form(
           key: login_form,
           child: Column(children: <Widget>[
-
             TextFormField(
-
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return "Veuillez entrer votre nom d'utilisateur ";
@@ -89,8 +88,8 @@ class _FormLoginState extends State<FormLogin> {
                 onPressed:  ()  async => {
                   if (login_form.currentState!.validate())
                     {
-                      if(await LoginUser.isUserThere()) {
-                       context.go('/')
+                      if(await CRUDUserController.checkUser(username.text, mdp.text) ) {
+                       context.go('/actualities')
                        },
                       } else {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -101,6 +100,13 @@ class _FormLoginState extends State<FormLogin> {
                 child: const Text('Se connecter'),
               ),
             ),
+            Center(
+              child: TextButton(
+                onPressed: () => {
+                  context.go('/signup')
+                }, child: Text("S'inscrire"),
+              ),
+            )
           ]
         )
    ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:go_router/go_router.dart';
+import 'package:space_trader_game/backend/local_storage.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({super.key});
@@ -12,16 +13,38 @@ class Navbar extends StatefulWidget {
 class _Navbar extends State<Navbar> {
   @override
   Widget build(BuildContext context) {
-    return AppBar(
+    if(LocalStorageHelper.getValue("token") == null) {
+      return AppBar(
+          title: Text("Space trader"),
+          actions: <Widget>[
+            IconButton(
+            icon: Icon(Icons.rocket_launch),
+            onPressed: () => setState(() {
+              context.go("/");
+            })
+            )
+          ],
+        );
+    } else {
+      return AppBar(
         title: Text("Space trader"),
         actions: <Widget>[
           IconButton(
-          icon: Icon(Icons.rocket_launch),
-          onPressed: () => setState(() {
-          })
-          )
+              icon: Icon(Icons.rocket_launch),
+              onPressed: () => setState(() {
+                context.go("/profil");
+              })
+          ),
+          IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () => setState(() {
+                context.go("/");
+                LocalStorageHelper.clearAll();
+              })
+          ),
         ],
       );
+    }
 
   }
 }
