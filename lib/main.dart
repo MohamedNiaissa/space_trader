@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: 'Space Trader',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           //primarySwatch: Colors.white,
