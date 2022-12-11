@@ -32,7 +32,7 @@ class _Navbar extends State<Navbar> {
           IconButton(
               icon: Icon(Icons.rocket_launch),
               onPressed: () => setState(() {
-                context.go("/profil");
+                context.go("/actualities");
               })
           ),
           IconButton(

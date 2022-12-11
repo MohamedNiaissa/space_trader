@@ -1,65 +1,80 @@
 import 'package:flutter/material.dart';
-/*
-class BottomNavigationBar extends StatefulWidget {
-  const BottomNavigationBar({Key? key}) : super(key: key);
+import 'package:space_trader_game/view/pages/actualities_page.dart';
+import 'package:space_trader_game/view/pages/profil_page.dart';
+
+import '../pages/signup_page.dart';
+
+class BottomNavigationBarElement extends StatefulWidget {
+  const BottomNavigationBarElement({super.key});
 
   @override
-  State<BottomNavigationBar> createState() => _BottomNavigationBarState();
+  State<BottomNavigationBarElement> createState() =>
+      _BottomNavigationBarElementState();
 }
 
-class _BottomNavigationBarState extends State<BottomNavigationBar> {
+class _BottomNavigationBarElementState
+    extends State<BottomNavigationBarElement> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  final pages = [
+    //Actualities(),
+    Text("News"),
+    SignupPage(),
+    Profil()
   ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.business),
-              label: 'Business',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              label: 'School',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.amber[800],
-          onTap: _onItemTapped,
-        )
+      body: pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.newspaper),
+            label: 'News',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.event),
+            label: 'Evenement',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profil',
+          )
+        ],
+        currentIndex: _selectedIndex,
+        //  selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+      ),
     );
-
   }
 }
 
-void _onItemTapped(int index) {
-  setState(() {
-    _selectedIndex = index;
-  });
-}
-
+/*
+BottomNavigationBar(
+items: const <BottomNavigationBarItem>[
+BottomNavigationBarItem(
+icon: Icon(Icons.newspaper),
+label: 'News',
+),
+BottomNavigationBarItem(
+icon: Icon(Icons.event),
+label: 'Evenement',
+),
+BottomNavigationBarItem(
+icon: Icon(Icons.person),
+label: 'Profil',
+),
+],
+currentIndex: _selectedIndex,
+selectedItemColor: Colors.deepPurple,
+onTap: _onItemTapped,
+));
 */

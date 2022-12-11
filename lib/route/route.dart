@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
-import '../view/pages/actualities.dart';
+import '../view/pages/actualities_page.dart';
 import '../view/pages/login_page.dart';
 import '../view/pages/profil_page.dart';
 import '../view/pages/signup_page.dart';

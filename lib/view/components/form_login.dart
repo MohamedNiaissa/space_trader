@@ -89,7 +89,7 @@ class _FormLoginState extends State<FormLogin> {
                   if (login_form.currentState!.validate())
                     {
                       if(await CRUDUserController.checkUser(username.text, mdp.text) ) {
-                       context.go('/actualities')
+                       context.go('/profil')
                        },
                       } else {
                     ScaffoldMessenger.of(context).showSnackBar(

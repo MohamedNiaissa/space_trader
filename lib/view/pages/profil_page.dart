@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:space_trader_game/backend/local_storage.dart';
 
 import '../components/form_user.dart';
+import '../shared/bottom_navigation.dart';
 import '../shared/navbar.dart';
 
 class Profil extends StatefulWidget {
@@ -60,11 +61,13 @@ class _ProfilState extends State<Profil> {
               ),
               }, icon: Icon(Icons.edit, color: Colors.white,
                 size: 40,
-              ))
+              )),
             ],
+
           ),
         ),
       ),
     );
+
   }
 }
