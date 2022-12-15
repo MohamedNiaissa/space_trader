@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:space_trader_game/view/pages/actualities_page.dart';
+import 'package:space_trader_game/view/pages/news_page.dart';
 import 'package:space_trader_game/view/pages/profil_page.dart';
 
 import '../pages/signup_page.dart';
@@ -18,7 +18,7 @@ class _BottomNavigationBarElementState
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final pages = [
-    Actualities(),
+    News(),
     Text("News"),
     Profil()
   ];

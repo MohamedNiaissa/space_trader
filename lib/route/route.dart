@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
-import '../view/pages/actualities_page.dart';
+import '../view/pages/news_page.dart';
 import '../view/pages/login_page.dart';
 import '../view/pages/profil_page.dart';
 import '../view/pages/signup_page.dart';
@@ -24,7 +24,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/actualities',
       builder: (BuildContext context, GoRouterState state) {
-        return const Actualities();
+        return const News();
       },
     ),
     GoRoute(
