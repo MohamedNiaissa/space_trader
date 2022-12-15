@@ -18,9 +18,8 @@ class _BottomNavigationBarElementState
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final pages = [
-    //Actualities(),
+    Actualities(),
     Text("News"),
-    SignupPage(),
     Profil()
   ];
 

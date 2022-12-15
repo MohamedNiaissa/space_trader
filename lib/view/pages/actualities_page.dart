@@ -35,11 +35,9 @@ class _ActualitiesState extends State<Actualities> {
                   fontSize: 25,
                 ),),
             ],
-
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBarElement(),
     );
 
   }

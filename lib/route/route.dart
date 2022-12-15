@@ -5,6 +5,7 @@ import '../view/pages/actualities_page.dart';
 import '../view/pages/login_page.dart';
 import '../view/pages/profil_page.dart';
 import '../view/pages/signup_page.dart';
+import '../view/shared/bottom_navigation.dart';
 
 final GoRouter router = GoRouter(
   routes: <GoRoute>[
@@ -32,5 +33,12 @@ final GoRouter router = GoRouter(
         return const Profil();
       },
     ),
+    GoRoute(
+      path: '/main',
+      builder: (BuildContext context, GoRouterState state) {
+        return const BottomNavigationBarElement();
+      },
+    )
+
   ],
 );

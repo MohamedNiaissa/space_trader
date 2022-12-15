@@ -63,7 +63,6 @@ class _ProfilState extends State<Profil> {
                 size: 40,
               )),
             ],
-
           ),
         ),
       ),
