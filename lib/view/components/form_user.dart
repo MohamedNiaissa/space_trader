@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'dart:developer' as developer;
 
 import '../../backend/local_storage.dart';
+import '../../controller/CRUD_user_controller.dart';
 
 class FormUser extends StatefulWidget {
   const FormUser({Key? key}) : super(key: key);
@@ -48,6 +50,7 @@ class _FormUserState extends State<FormUser> {
     }
 
 
+    Map<String, String> userInfos;
     return Padding(
       padding: const EdgeInsets.all(50.0),
       child: Form(
@@ -132,7 +135,34 @@ class _FormUserState extends State<FormUser> {
             Center(
               child: TextButton(
                 onPressed: () => {
-                }, child: Text("Modifier !"),
+                   [{"fieldname" : "nom", "fieldvalue" : username.text}, {"fieldname" : "photo", "fieldvalue":  photo.text}, {"fieldname" : "profilFFI", "fieldvalue":  profilFFI.text}, {"fieldname" : "dateNaiss", "fieldvalue":  dateNaiss.text}].forEach((field) {
+                     if (field["fieldname"] == "profilFFI" && field["fieldvalue"] != "non renseigné") {
+                      CRUDUserController.updateUserDatas("nom", user["nom"], field["fieldname"], field["fieldvalue"]);
+                     } else if (field["fieldname"] == "nom") {
+                       CRUDUserController.updateUserDatas("nom", user["nom"], field["fieldname"], field["fieldvalue"]);
+                     } else if (field["fieldname"] == "photo") {
+                       CRUDUserController.updateUserDatas("nom", user["nom"], field["fieldname"], field["fieldvalue"]);
+                     } else if (field["fieldname"] == "dateNaiss" && field["fieldvalue"] != "non renseigné") {
+                       CRUDUserController.updateUserDatas("nom", user["dateNaiss"], field["fieldname"], field["fieldvalue"]);
+                     }
+                   }),
+
+                  developer.log(user["nom"]),
+                  developer.log(user.toString()),
+
+                //  CRUDUserController.updateUserDatas("nom", user["nom"], "nom", username.text),
+                  setState(() {
+                  })
+             /*   CRUDUserController.updateUserDatas("username", user["nom"], "photo", photo.text),
+                if (profilFFI.text != "non renseigné") {
+                  CRUDUserController.updateUserDatas("username", user["nom"], "profilFFI", profilFFI.text),
+                },
+                if (dateNaiss.text != "non renseigné") {
+                  CRUDUserController.updateUserDatas("username", user["nom"], "dateNaiss", dateNaiss.text),
+                }
+
+              */
+              }, child: Text("Modifier !"),
               ),
             )
           ]

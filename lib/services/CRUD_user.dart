@@ -1,5 +1,6 @@
 import 'package:space_trader_game/backend/local_storage.dart';
 import 'package:space_trader_game/models/Utilisateurs.dart';
+import 'package:mongo_dart/mongo_dart.dart';
 
 import '../backend/mongodb.dart';
 import 'package:crypt/crypt.dart';
@@ -43,5 +44,15 @@ class CRUDUser {
     } catch (e){
       throw Error();
     }
+  }
+
+  static updateUser(field, username, modifyfield, value) async {
+    var db = await MongoDataBase.connect();
+    var collection = await db.collection('Utilisateurs');
+    collection.updateOne(
+        where.eq(field, username), modify.set(modifyfield, value));
+    // collection.updateOne(where.eq("nom", "bsr"), modify.set("mdp", "bjr"));
+
+
   }
 }

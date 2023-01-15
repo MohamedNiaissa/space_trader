@@ -17,8 +17,7 @@ class Utilisateurs {
   @override
   String toString() {
     //return 'Utilisateurs{"nom": "$nom", "mdp": "$mdp", photo: "$photo", mail: "$mail", telephone: $telephone, profilFFI: $profilFFI, dateNaiss: $dateNaiss, isGerant: $isGerant}';
-    return 'Utilisateurs{"nom": "'+nom+'", "mdp": "'+mdp+'", "photo": "'+photo+'", "mail": "'+mail+'", "telephone": $telephone, "dateNaiss": $profilFFI, "dateNaiss": $dateNaiss, "isGerant": $isGerant}';
-
+    return 'Utilisateurs{"nom": "'+nom+'", "mdp": "'+mdp+'", "photo": "'+photo+'", "mail": "'+mail+'", "telephone": $telephone, "profilFFI": $profilFFI, "dateNaiss": $dateNaiss, "isGerant": $isGerant}';
   }
 
   Map<String, dynamic> toMap() {
