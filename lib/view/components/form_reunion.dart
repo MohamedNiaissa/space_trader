@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../controller/reunion_controller.dart';
+import 'package:go_router/go_router.dart';
+
+
 class FormReunion extends StatefulWidget {
   const FormReunion({Key? key}) : super(key: key);
 
@@ -114,6 +118,9 @@ class _FormReunionState extends State<FormReunion> {
               Center(
                 child: TextButton(
                   onPressed:  ()  async => {
+                    ReunionController.insertReunionFromForm(meeting_name.text,meeting_subject.text,meeting_photo.text),
+                    context.go('/actualities')
+
                   },
                   child: const Text("Créer"),
                 ),
