@@ -4,6 +4,7 @@ import 'package:space_trader_game/view/shared/bottom_navigation.dart';
 import '../../controller/news_controller.dart';
 import '../shared/navbar.dart';
 import 'dart:developer' as developer;
+import 'package:intl/intl.dart';
 
 
 class News extends StatefulWidget {
@@ -15,7 +16,7 @@ class News extends StatefulWidget {
 
 class _NewsState extends State<News> {
   var allNews = NewsController.getAllNews();
-
+  DateFormat dateFormat = DateFormat("dd/MM/yyyy à HH:mm:ss");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,27 +40,30 @@ class _NewsState extends State<News> {
                   fontSize: 25,
                 ),),
         FutureBuilder<dynamic?>(
-
             future: allNews,
             builder: (context, snapshot) {
-
               if (snapshot.hasData &&
                   snapshot.connectionState == ConnectionState.done) {
                 return ListView.builder(
                   shrinkWrap: true,
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
-                    developer.log(snapshot.data[index]["typeEvent"], name:'Actualites Page' );
+                    String dateCreateEvent = dateFormat.format(snapshot.data[index]["dateCreateEvent"]);
+                    //developer.log(snapshot.data[index]["typeEvent"], name:'Actualites Page' );
                     return Column(
                         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget> [
                         Card(
                           color: Colors.white70,
-
-                          child: Text(snapshot.data[index]["typeEvent"],
-                            style: TextStyle(height: 5, fontSize: 20, color: Colors.deepPurple),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7.0),
                           ),
+                          margin: EdgeInsets.all(10),
+                          child: Text(snapshot.data[index]["typeEvent"] + " le " + dateCreateEvent  ,
+                            style: const TextStyle(height: 3, fontSize: 18, color: Colors.deepPurple),
+                          ),
+
                         ),
                       ]
                     );// Text(snapshot.data?[index] ?? "got null");
