@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:space_trader_game/view/pages/create_event_page.dart';
 import 'package:space_trader_game/view/pages/news_page.dart';
 import 'package:space_trader_game/view/pages/profil_page.dart';
 
@@ -19,7 +20,7 @@ class _BottomNavigationBarElementState
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final pages = [
     News(),
-    Text("News"),
+    Event(),
     Profil()
   ];
 
