@@ -4,6 +4,10 @@ import 'package:mongo_dart/mongo_dart.dart';
 
 import '../backend/mongodb.dart';
 import 'package:crypt/crypt.dart';
+import 'package:intl/intl.dart';
+
+
+import '../models/Actualites.dart';
 
 
 class CRUDUser {
@@ -17,6 +21,16 @@ class CRUDUser {
 
     LocalStorageHelper.saveValue("token", new_user.toString());
     await collection.insertOne(new_user.toMap());
+
+    var subscription = await collection.findOne({"nom": username});
+
+    DateFormat dateFormat = DateFormat("dd/MM/yyyy à HH:mm:ss");
+
+    Actualites new_actualite = new Actualites("Inscription", subscription["_id"], dateFormat.format(DateTime.now()), dateFormat.format(DateTime.now()), false);
+
+    collection = await db.collection('Actualites');
+
+    await collection.insertOne(new_actualite.toMap());
 
   }
 
@@ -56,3 +70,4 @@ class CRUDUser {
 
   }
 }
+

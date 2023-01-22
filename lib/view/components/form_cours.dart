@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:date_field/date_field.dart';
 
 class FormCours extends StatefulWidget {
   const FormCours({Key? key}) : super(key: key);
@@ -116,6 +117,21 @@ class _FormCoursState extends State<FormCours> {
             ),
           ),
           SizedBox(height: 15),
+          DateTimeFormField(
+            decoration: const InputDecoration(
+              hintStyle: TextStyle(color: Colors.black45),
+              errorStyle: TextStyle(color: Colors.redAccent),
+              border: OutlineInputBorder(),
+              suffixIcon: Icon(Icons.event_note),
+              labelText: "Veuillez entrer la date et l'heure",
+            ),
+            mode: DateTimeFieldPickerMode.dateAndTime,
+            autovalidateMode: AutovalidateMode.always,
+            validator: (e) => (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
+            onDateSelected: (DateTime value) {
+              print(value);
+            },
+          ),
           TextFormField(
             validator: (value) {
               if (value == null || value.isEmpty) {

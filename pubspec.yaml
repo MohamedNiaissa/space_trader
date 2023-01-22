@@ -52,6 +52,7 @@ dev_dependencies:
   universal_html: ^2.0.8
   intl: ^0.17.0
   crypt: ^4.2.1
+  date_field: ^3.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

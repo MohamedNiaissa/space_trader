@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../controller/reunion_controller.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 
 class FormReunion extends StatefulWidget {
@@ -17,6 +18,9 @@ class _FormReunionState extends State<FormReunion> {
   TextEditingController meeting_name = new TextEditingController();
   TextEditingController meeting_subject = new TextEditingController();
   TextEditingController meeting_photo = new TextEditingController();
+  TextEditingController debutReunion = new TextEditingController();
+
+  String choosenDateReunion = "";
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +89,36 @@ class _FormReunionState extends State<FormReunion> {
                 ),
               ),
               SizedBox(height: 15),
+              TextField(
+                  controller: debutReunion, //editing controller of this TextField
+                  decoration: InputDecoration(
+                      icon: Icon(Icons.calendar_today), //icon of text field
+                      labelText: "Date de la reunion" //label text of field
+                  ),
+                  readOnly:
+                  true, //set it true, so that user will not able to edit text
+                  onTap: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2101));
+
+                    if (pickedDate != null) {
+                      print(pickedDate);
+                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                      print(
+                          formattedDate);
+                      setState(() {
+                        debutReunion.text =
+                            formattedDate; //set output date to TextField value.
+                        choosenDateReunion = formattedDate;
+                      });
+                    } else {
+                      print("Date is not selected");
+                    }
+                  }),
+              SizedBox(height: 15),
               TextFormField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -118,9 +152,10 @@ class _FormReunionState extends State<FormReunion> {
               Center(
                 child: TextButton(
                   onPressed:  ()  async => {
-                    ReunionController.insertReunionFromForm(meeting_name.text,meeting_subject.text,meeting_photo.text),
-                    context.go('/actualities')
-
+                    //context.go('/main')
+                    setState(() {
+                      ReunionController.insertReunionFromForm(meeting_name.text,meeting_subject.text,meeting_photo.text, choosenDateReunion);
+                    })
                   },
                   child: const Text("Créer"),
                 ),

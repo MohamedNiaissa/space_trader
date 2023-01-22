@@ -48,8 +48,8 @@ class _NewsState extends State<News> {
                       shrinkWrap: true,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        String dateCreateEvent = dateFormat
-                            .format(snapshot.data[index]["dateCreateEvent"]);
+                       // String dateCreateEvent = dateFormat
+                         //   .format(snapshot.data[index]["dateCreateEvent"]);
                         //developer.log(snapshot.data[index]["typeEvent"], name:'Actualites Page' );
                         return Column(
                             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,7 +64,7 @@ class _NewsState extends State<News> {
                                 child: Text(
                                   snapshot.data[index]["typeEvent"] +
                                       " le " +
-                                      dateCreateEvent,
+                                      snapshot.data[index]["dateCreateEvent"],
                                   style: const TextStyle(
                                       height: 3,
                                       fontSize: 18,

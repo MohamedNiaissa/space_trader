@@ -10,7 +10,7 @@ class News {
     var collection = await db.collection('Actualites');
     var news = await collection.find(
     ).toList();
-    developer.log(news[0]["typeEvent"], name:'Actualites' );
+    //developer.log(news[0]["dateCreateEvent"], name:'Actualites' );
     return news;
   }
 
