@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../controller/reunion_controller.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'dart:developer' as developer;
+
 
 
 class FormReunion extends StatefulWidget {
@@ -104,6 +106,13 @@ class _FormReunionState extends State<FormReunion> {
                         firstDate: DateTime(2000),
                         lastDate: DateTime(2101));
 
+
+                    var _selectedTime = await showTimePicker(
+                      context: context,
+                      initialTime: TimeOfDay.now(),
+                    );
+
+
                     if (pickedDate != null) {
                       print(pickedDate);
                       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
@@ -111,8 +120,8 @@ class _FormReunionState extends State<FormReunion> {
                           formattedDate);
                       setState(() {
                         debutReunion.text =
-                            formattedDate; //set output date to TextField value.
-                        choosenDateReunion = formattedDate;
+                            formattedDate + " " + formatTime(_selectedTime.toString()); //set output date to TextField value.
+                        choosenDateReunion = formattedDate + " " + formatTime(_selectedTime.toString());
                       });
                     } else {
                       print("Date is not selected");
@@ -162,4 +171,12 @@ class _FormReunionState extends State<FormReunion> {
               ),
             ])));
   }
+}
+
+String formatTime(String time) {
+  var formatedTime = time;
+  formatedTime = formatedTime.replaceAll("TimeOfDay(", "");
+  formatedTime = formatedTime.replaceAll(")", "");
+  developer.log(formatedTime);
+  return formatedTime;
 }

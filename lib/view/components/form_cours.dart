@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:date_field/date_field.dart';
+import 'package:intl/intl.dart';
+import 'package:space_trader_game/controller/cours_controller.dart';
+
 
 class FormCours extends StatefulWidget {
   const FormCours({Key? key}) : super(key: key);
@@ -10,11 +13,15 @@ class FormCours extends StatefulWidget {
 
 class _FormCoursState extends State<FormCours> {
   final cours_form = GlobalKey<FormState>();
+  String choosenDateCours = "";
+  String choosenDateFinCours = "";
+
 
   TextEditingController cours_name = new TextEditingController();
   TextEditingController level = new TextEditingController();
   TextEditingController field = new TextEditingController();
-  TextEditingController duration = new TextEditingController();
+  TextEditingController endCours = new TextEditingController();
+  TextEditingController date = new TextEditingController();
   TextEditingController discipline = new TextEditingController();
  // TextEditingController participants = new TextEditingController();
   TextEditingController number_of_seats = new TextEditingController();
@@ -117,50 +124,75 @@ class _FormCoursState extends State<FormCours> {
             ),
           ),
           SizedBox(height: 15),
-          DateTimeFormField(
-            decoration: const InputDecoration(
-              hintStyle: TextStyle(color: Colors.black45),
-              errorStyle: TextStyle(color: Colors.redAccent),
-              border: OutlineInputBorder(),
-              suffixIcon: Icon(Icons.event_note),
-              labelText: "Veuillez entrer la date et l'heure",
-            ),
-            mode: DateTimeFieldPickerMode.dateAndTime,
-            autovalidateMode: AutovalidateMode.always,
-            validator: (e) => (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
-            onDateSelected: (DateTime value) {
-              print(value);
-            },
-          ),
-          TextFormField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Veuillez entrer la durée ";
-              }
-              return null;
-            },
-            controller: duration,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Durée',
-              labelStyle: TextStyle(
-                color: Colors.black,
+          TextField(
+              controller: date,
+              decoration: InputDecoration(
+                  icon: Icon(Icons.calendar_today),
+                  labelText: "Date du cours"
               ),
-              fillColor: Colors.black,
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.black,
-                ),
+              readOnly:
+              true,
+              onTap: () async {
+                DateTime? pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2101));
+
+                var _selectedTime = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay.now(),
+                );
+
+                if (pickedDate != null) {
+                  print(pickedDate);
+                  String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                  print(
+                      formattedDate);
+                  setState(() {
+                    date.text =
+                        formattedDate + " " + formatTime(_selectedTime.toString()); //set output date to TextField value.
+                    choosenDateFinCours = formattedDate + " " + formatTime(_selectedTime.toString());
+                  });
+                } else {
+                  print("Date is not selected");
+                }
+              }),
+          SizedBox(height: 15),
+          TextField(
+              controller: endCours,
+              decoration: InputDecoration(
+                  icon: Icon(Icons.calendar_today),
+                  labelText: "Fin du cours"
               ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.black,
-                  width: 2.0,
-                ),
-              ),
-            ),
-          ),
+              readOnly:
+              true,
+              onTap: () async {
+                DateTime? pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2101));
+
+                var _selectedEndTime = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay.now(),
+                );
+
+                if (pickedDate != null) {
+                  print(pickedDate);
+                  String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                  print(
+                      formattedDate);
+                  setState(() {
+                    endCours.text =
+                        formattedDate + " " + formatTime(_selectedEndTime.toString()); //set output date to TextField value.
+                        choosenDateFinCours = formattedDate + " " + formatTime(_selectedEndTime.toString());
+                  });
+                } else {
+                  print("Date is not selected");
+                }
+              }),
           SizedBox(height: 15),
           TextFormField(
             validator: (value) {
@@ -225,6 +257,9 @@ class _FormCoursState extends State<FormCours> {
           Center(
             child: TextButton(
               onPressed:  ()  async => {
+                setState(() {
+                  CoursController.insertCoursFromForm(cours_name.text, level.text, field.text, date.text, endCours.text, discipline.text, int.parse(number_of_seats.text));
+                })
               },
               child: const Text("Créer"),
             ),
@@ -233,4 +268,12 @@ class _FormCoursState extends State<FormCours> {
       ) ,
     ));
   }
+}
+
+
+String formatTime(String time) {
+  var formatedTime = time;
+  formatedTime = formatedTime.replaceAll("TimeOfDay(", "");
+  formatedTime = formatedTime.replaceAll(")", "");
+  return formatedTime;
 }
